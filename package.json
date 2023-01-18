@@ -1,0 +1,32 @@
+{
+  "name": "shopping-cart",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@handlebars/allow-prototype-access": "^1.0.5",
+    "bcrypt-nodejs": "^0.0.3",
+    "body-parser": "~1.13.2",
+    "connect-flash": "^0.1.1",
+    "connect-mongo": "^3.2.0",
+    "cookie-parser": "~1.3.5",
+    "csurf": "^1.11.0",
+    "debug": "~2.2.0",
+    "express": "~4.13.1",
+    "express-fileupload": "^1.4.0",
+    "express-handlebars": "^3.0.0",
+    "express-session": "^1.17.3",
+    "express-validator": "^2.20.5",
+    "fs": "^0.0.1-security",
+    "hbs": "~3.1.0",
+    "mongoose": "^6.8.3",
+    "morgan": "~1.6.1",
+    "passport": "^0.6.0",
+    "passport-local": "^1.0.0",
+    "promptpay-qr": "^0.5.0",
+    "qrcode": "^1.5.1",
+    "serve-favicon": "~2.3.0"
+  }
+}
