@@ -17,10 +17,13 @@ var MongoStore = require('connect-mongo')(session);
 
 var routes = require('./routes/index');
 var userRoutes = require('./routes/user');
+var adminRoutes = require('./routes/admin')
 
 var app = express();
 
-mongoose.connect('mongodb://127.0.0.1:27017/shopping')
+mongoose.set('strictQuery', true);
+mongoose.connect('mongodb+srv://admin:1234@cluster0.espispq.mongodb.net/?retryWrites=true&w=majority')
+
 require('./config/passport');
 
 // view engine setup
@@ -58,6 +61,7 @@ app.use(function(req ,res ,next){
 
 app.use('/user', userRoutes);
 app.use('/', routes);
+app.use('/admin', adminRoutes);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

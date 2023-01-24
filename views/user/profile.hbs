@@ -1,23 +1,93 @@
-<div class="row">
-    <div class="col-md-8 col-md-offset-2">
-        <h1>User Profile</h1>
-        <hr>
-        <h2>My Order</h2>
-        {{#each orders}}
-         <div class="panel panel-default">
-            <div class="panel-body">
-                <ul class="list-group">
-                    {{#each this.items}}
-                    <li class="list-group-item">
-                        <span class="badge">{{this.price}}</span>
-                        {{this.item.title}} | {{this.qty}}
-                    </li>
-                    {{/each}}
-                </ul>
-            </div>
-            <div class="panel-footer">${{this.cart.totalPrice}}</div>
+<div class="page page-profile">
+    <h1><i class="fa fa-user" aria-hidden="true"></i> ข้อมูลเกี่ยวกับบัญชี</h1>
+    <div class="flex-row1">
+        <div class="flex-column">
+            <h2>ข้อมูลทั่วไป</h2>
+            <form class="form" method="POST" action="/user/edit-profile">
+                <div class="fields fields--2">
+                    <label class="field">
+                        <span class="field__label" for="firstname">First name</span>
+                        <input class="field__input" type="text" id="firstname" name="firstname" value="{{this.users.firstname}}" />
+                    </label>
+                    <label class="field">
+                        <span class="field__label" for="lastname">Last name</span>
+                        <input class="field__input" type="text" id="lastname" name="lastname" value="{{this.users.lastname}}" />
+                    </label>
+                </div>
+                <label class="field">
+                    <span class="field__label" for="email">Email</span>
+                    <input class="field__input" type="text" name="email" value="{{this.users.email}}" id="email" disabled />
+                </label>
+                <label class="field">
+                    <span class="field__label" for="address">Address</span>
+                    <input class="field__input" id="address" type="text" name="address" value="{{this.users.address}}" />
+                </label>
+                <div class="fields fields--2">
+                    <label class="field">
+                        <span class="field__label" for="subdistrict">แขวง / ตำบล</span>
+                        <input class="field__input" type="text" id="subdistrict" name="subdistrict" value="{{this.users.subdistrict}}" />
+                    </label>
+                    <label class="field">
+                        <span class="field__label" for="district">เขต / อำเภอ</span>
+                        <input class="field__input" type="text" id="district" name="district" value="{{this.users.district}}" />
+                    </label>
+                </div>
+                <div class="fields fields--2">
+                    <label class="field">
+                        <span class="field__label" for="province">จังหวัด</span>
+                        <input class="field__input" type="text" id="province" name="province" value="{{this.users.province}}" />
+                    </label>
+                    <label class="field">
+                        <span class="field__label" for="zipcode">ZIP CODE</span>
+                        <input class="field__input" type="text" id="zipcode" name="zipcode" value="{{this.users.zipcode}}" />
+                    </label>
+                </div>
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <input type="hidden" name="email" value="{{ this.users.email }}">
+                <button class="btn btn-primary" type="submit">Save Change</button>
+            </form>
         </div>
-        {{/each}}
-       
+        <div class="flex-column">
+            <h2>คำสั่งซื้อของฉัน</h2>
+            <div class="accordion accordion-flush" id="accordionFlushExample">
+                {{#each orders}}
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="flush-heading{{this._id}}">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#flush-collapse{{this._id}}" aria-expanded="false"
+                            aria-controls="flush-collapse{{this._id}}">
+                            Order : #{{this._id}}
+                        </button>
+                    </h2>
+                    <div id="flush-collapse{{this._id}}" class="accordion-collapse collapse"
+                        aria-labelledby="flush-heading{{this._id}}" data-bs-parent="#accordionFlushExample">
+                        <div class="accordion-body">
+                            <p>วันที่สั่ง : {{this.date}}</p>
+                            <p>สถานะ : 
+                                <button class="btn btn-warning">รออนุมัติ</button>
+                               
+                            </p>
+                            <p>ตระกร้า :</p>
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <ul class="list-group">
+                                        {{#each this.items}}
+                                        <li class="list-group-item">
+                                            <span class="badge">{{this.price}} บาท</span>
+                                            {{this.item.title}} ( จำนวน : {{this.qty}} ชิ้น )
+                                        </li>
+                                        {{/each}}
+                                    </ul>
+                                </div>
+                                <div class="panel-footer">
+                                    รวมทั้งหมด <strong>{{this.cart.totalPrice}} บาท </strong>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
     </div>
 </div>

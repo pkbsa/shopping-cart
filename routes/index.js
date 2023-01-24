@@ -11,6 +11,14 @@ var Order = require('../models/order');
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
+  
+    res.render("shop/index", {
+      title: "Shopping Cart"
+    });
+ 
+});
+
+router.get("/products", function (req, res, next) {
   var successMsg = req.flash('success')[0];
   Product.find(function (err, docs) {
     var productChunk = [];
@@ -18,7 +26,7 @@ router.get("/", function (req, res, next) {
     for (var i = 0; i < docs.length; i += chunkSize) {
       productChunk.push(docs.slice(i, i + chunkSize));
     }
-    res.render("shop/index", {
+    res.render("shop/products", {
       title: "Shopping Cart",
       products: productChunk,
       successMsg: successMsg || null,
@@ -33,12 +41,12 @@ router.get("/add-to-cart/:id", function (req, res, next) {
 
   Product.findById(productId, function (err, product) {
     if (err) {
-      return res.redirect("/");
+      return res.redirect("/products");
     }
     cart.add(product, product.id);
     req.session.cart = cart;
     console.log(req.session.cart);
-    res.redirect("/");
+    res.redirect("/products");
   });
 });
 
@@ -106,6 +114,17 @@ router.post('/checkout',isLoggedIn, function(req, res, next){
   uploadFile = './public/Slip/' + sampleFile.name;
 
   sampleFile.mv(uploadFile);
+  
+  const today = new Date();
+  const offset = -(today.getTimezoneOffset() / 60) + 7;
+  const thaiDate = new Date(today.getTime() + offset * 60 * 60 * 1000);
+  const date = thaiDate.toLocaleString("th-TH", {
+    hour: "numeric",
+    minute: "numeric",
+    day: "numeric",
+    month: "numeric",
+    year: "numeric"
+  });
 
   var order = new Order({
     user: req.user,
@@ -113,14 +132,20 @@ router.post('/checkout',isLoggedIn, function(req, res, next){
     address: req.body.address,
     name: req.body.name,
     phone: req.body.phone,
-    paymentId: sampleFile.name
+    paymentId: sampleFile.name,
+    status: "Pending",
+    date: date
   });
   order.save(function(err, result){
+    if (err){ 
+      console.log(err)
+    }
     req.flash('success', 'Sucessfully brought product!') 
     req.session.cart = null;
-    res.redirect('/');
+    res.redirect('/products');
   })
 })
+
 
 module.exports = router;
 
@@ -128,7 +153,7 @@ function isLoggedIn(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
-  req.session.oldUrl = req.url;
+  req.session.oldUrl = req.originalUrl;
   console.log(req.session.oldUrl)
   res.redirect("/user/signin");
 }

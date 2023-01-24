@@ -1,0 +1,24 @@
+<h1>Welcome admin </h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ตะกร้า</th>
+      <th scope="col">ชื่อ</th>
+      <th scope="col">ที่อยู่</th>
+      <th scope="col">ยอด</th>
+      <th scope="col">สถานะ</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each orders}}
+    <tr>
+      <th scope="row">{{this._id}}</th>
+      <td>{{this.name}}</td>
+      <td>{{this.address}}</td>
+      <td>{{this.cart.totalPrice}}</td>
+      <td>{{this.status}}</td>
+    </tr>
+    {{/each}}
+  </tbody>
+</table>
+{{orders}}

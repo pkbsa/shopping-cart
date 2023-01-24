@@ -37,6 +37,14 @@ passport.use('local.signup',new LocalStrategy({
         var newUser = new User();
         newUser.email = email;
         newUser.password = newUser.encryptPassword(password);
+        newUser.admin = 0;
+        newUser.firstname = "";
+        newUser.lastname = "";
+        newUser.address =  "";
+        newUser.subdistrict =  "";
+        newUser.district =  "";
+        newUser.province =  "";
+        newUser.zipcode =  "";
         newUser.save(function(err, result){
             if (err) {
                 return done(err);

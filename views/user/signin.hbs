@@ -1,27 +1,27 @@
-<div class="row">
-    <div class="col-md-4 col-md-offset-4">
-        <h1>Sign In</h1>
-        {{message}}
-        {{#if hasErrors}}
-
-            <div class="alert alert-danger">
-                {{#each messages}}
-                    <p>{{this}}</p>
-                {{/each}}
-            </div>
-        {{/if}}
-        <form action='/user/signin' method="post">
-            <div class="form-group">
-                <label for="email">E-mail</label>
-                <input type="text" id="email" name="email" class="form-control">
-            </div>
-             <div class="form-group">
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control">
-            </div>
-            <input type="hidden" name="_csrf" value="{{ csrfToken }}">
-            <button type="submit" class="btn btn-primary">Sign In</button>
-        </form>
-        <p>Don't have an account <a href="/user/signup">Sign up instead</a></p>
+<div class="page page-signin">
+    <div class="row">
+            <h1>Sign In</h1>
+            <p class="up">Don't have an account? <a href="/user/signup">Sign up</a></p>
+            <form action='/user/signin' method="post">
+                <div class="form-group">
+                    <label for="email">E-mail</label><br>
+                    <input type="text" id="email" name="email">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label><br>
+                    <input type="password" id="password" name="password">
+                </div>
+                <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+                <button type="submit">Sign In</button>
+            </form>
+            {{#if hasErrors}}
+                <div class="btn alert alert-danger">
+                    {{#each messages}}
+                        <p>{{this}}</p>
+                    {{/each}}
+                </div>
+            {{/if}}
+            <p>* By Logging in, you agree to our Terms of Use and to receive<br>
+Our emails & updates and acknowledge that you read our Privacy Policy.</p>
     </div>
 </div>
