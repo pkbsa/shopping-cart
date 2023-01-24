@@ -6,42 +6,36 @@ mongoose.connect('mongodb+srv://admin:1234@cluster0.espispq.mongodb.net/?retryWr
 
 var products = [
     new Product({
-        imagePath: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Gothiccover.png',
-        title: 'Video Game 1',
+        imagePath: '/products/product1.jpg',
+        title: 'พวงกุญแจ กล้วย',
         description: 'Very Awesome Video Game Part 1',
         price: 10
     }),
     new Product({
-        imagePath: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Gothiccover.png',
-        title: 'Video Game 2',
+        imagePath: '/products/product2.jpg',
+        title: 'พวงกุญแจ การ์ตูน',
         description: 'Very Awesome Video Game Part 2',
         price: 10
     }),
     new Product({
-        imagePath: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Gothiccover.png',
-        title: 'Video Game 3',
-        description: 'Very Awesome Video Game Part 3',
+        imagePath: '/products/product2.jpg',
+        title: 'พวงกุญแจ การ์ตูน',
+        description: 'Very Awesome Video Game Part 2',
         price: 10
     }),
     new Product({
-        imagePath: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Gothiccover.png',
-        title: 'Video Game 4',
-        description: 'Very Awesome Video Game Part 4',
+        imagePath: '/products/product2.jpg',
+        title: 'พวงกุญแจ การ์ตูน',
+        description: 'Very Awesome Video Game Part 2',
         price: 10
     }),
     new Product({
-        imagePath: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Gothiccover.png',
-        title: 'Video Game 5',
-        description: 'Very Awesome Video Game Part 5',
+        imagePath: '/products/product2.jpg',
+        title: 'พวงกุญแจ การ์ตูน',
+        description: 'Very Awesome Video Game Part 2',
         price: 10
-    }),
-    new Product({
-        imagePath: 'https://upload.wikimedia.org/wikipedia/en/5/5e/Gothiccover.png',
-        title: 'Video Game 6',
-        description: 'Very Awesome Video Game Part 6',
-        price: 10
-    }),
-];
+    })
+]
 
 var done = 0;
 for(var i=0; i<products.length;i++){
