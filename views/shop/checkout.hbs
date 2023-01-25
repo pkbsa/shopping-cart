@@ -1,73 +1,134 @@
-<div class='row'>
-    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
-        <h1>Checkout</h1>
-        <h4>Total: $ {{ total }}</h4>
-        <form action="/checkout" method="post" id="checkout-form" enctype="multipart/form-data">
-            <div class="row">
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="name">Name</label>
-                        <input type="text" class="form-control" name="name">
+<div class="page page-checkout">
+    <h1>ชำระเงิน</h1>
+    <div class="flex-row1">
+        <div class="flex-column">
+            <form id="regForm" action="/checkout" method="POST" enctype="multipart/form-data">
+                <!-- One "tab" for each step in the form: -->
+                <div class="tab">
+                    <label class="field1">ที่อยู่จัดส่ง</label>
+                    <div class="fields fields--2">
+                        <label class="field">
+                            <span class="field__label" for="firstname">First name<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="firstname" name="firstname"
+                                value="{{this.users.firstname}}" />
+                        </label>
+                        <label class="field">
+                            <span class="field__label" for="lastname">Last name<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="lastname" name="lastname"
+                                value="{{this.users.lastname}}" />
+                        </label>
+                    </div>
+                    <label class="field">
+                        <span class="field__label" for="address">Address<span class="required">*</span></span>
+                        <input class="field__input" id="address" type="text" name="address"
+                            value="{{this.users.address}}" />
+                    </label>
+                    <div class="fields fields--2">
+                        <label class="field">
+                            <span class="field__label" for="subdistrict">แขวง / ตำบล<span
+                                    class="required">*</span></span>
+                            <input class="field__input" type="text" id="subdistrict" name="subdistrict"
+                                value="{{this.users.subdistrict}}" />
+                        </label>
+                        <label class="field">
+                            <span class="field__label" for="district">เขต / อำเภอ<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="district" name="district"
+                                value="{{this.users.district}}" />
+                        </label>
+                    </div>
+                    <div class="fields fields--2">
+                        <label class="field">
+                            <span class="field__label" for="province">จังหวัด<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="province" name="province"
+                                value="{{this.users.province}}" />
+                        </label>
+                        <label class="field">
+                            <span class="field__label" for="zipcode">ZIP CODE<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="zipcode" name="zipcode"
+                                value="{{this.users.zipcode}}" />
+                        </label>
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="address">Address</label>
-                        <input type="text" class="form-control" name="address">
+                <div class="tab">
+                    <label class="field1">เลือกวิธีชำระเงิน</label>
+                    <div class="payment-info">
+                        <input type="radio" id="html" name="fav_language" value="HTML">
+                        <label for="html" class="field2">โอนธนาคาร (Siranut Akarawuthi)</label><br>
+                        <ul>
+                            <li>กรุงศรี : 649-1-0497804</li>
+                            <li>ไทยพาณิชย์ : 038-474665-3</li>
+                            <li>กสิกร : 033-1-67481-8</li>
+                        </ul>
+                        <input type="radio" id="html" name="fav_language" value="HTML">
+                        <label for="html" class="field2">True Wallet</label><br>
+                        <ul>
+                            <li>085-525-9987</li>
+                        </ul>
+                    </div>
+                     <div class="fields fields--2">
+                        <label class="field">
+                            <span class="field__label" for="province">วันที่ชำระเงิน<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="province" name="province"
+                                placeholder="13/01/2023"/>
+                        </label>
+                        <label class="field">
+                            <span class="field__label" for="zipcode">เวลา<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="zipcode" name="zipcode"
+                                placeholder="17.01"/>
+                        </label>
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">อัพโหลดหลักฐานการชำระเงิน</label>
+                        <input class="form-control-lg" type="file" name="sampleFile" accept="image/*" id="formFile">
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <input type="text" class="form-control" name="phone">
+                <div class='middle' style="overflow:auto;">
+                    <div style="float:none;">
+                        <button type="button" id="prevBtn" class='btn btn-primary'
+                            onclick="nextPrev(-1)">Previous</button>
+                        <button type="button" id="nextBtn" class='btn btn-primary' onclick="nextPrev(1)">Next</button>
                     </div>
                 </div>
-                <div class="col-xs-12">
-                    <img src="../QR/{{QRPath}}.svg" alt="qrcode">
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;">
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
+                    <span class="step"></span>
                 </div>
-                <div class="col-xs-12">
-                    <label for="slip">Upload Slip</label>
-                    <div class="image-preview" id="imagePreview">
-                        <img src="" alt="Image Preview" class="image-preview__image" />
-                        <span class="image-preview__default-text">Image Preview</span>
+            </form>
+        </div>
+        <div class="flex-column-sum">
+            <h3>คำสั่งซื้อ</h3>
+            <div class="flex-column-1">
+                {{#each products}}
+                <div class="flex-row-1">
+                    <div class="flex-row-2">
+                        <img src="{{this.item.imagePath}}">
+                        <div>
+                            <h2>{{this.item.title}}</h2>
+                            <p id="price">ราคา : {{this.item.price}} บาท ({{this.qty}} ชิ้น)</p>
+                        </div>
                     </div>
-                    <input type="file" name="sampleFile" id="sampleFile" accept="image/*" /><br />
+                    <div class="flex-column-below">
+
+                        <h3>{{this.price}}.00 บาท</h3>
+                    </div>
                 </div>
-                <div class="col-xs-12">
-                    <button type="submit" class="btn btn-primary">Buy Now</button>
+                {{/each}}
+                <hr>
+
+                <div class="flex-row-1 total pad-top">
+                    <h5> </h5>
+                    <div class="flex-coloumn-1">
+                        <p>ค่าส่ง 30 บาท</p>
+                        <div class="flex-row-3">
+                            <h3>Subtotal </h3>
+                            <h3>{{total}}.00 บาท</h3>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </form>
+        </div>
     </div>
 </div>
-<script>
-      const inpFile = document.getElementById("sampleFile");
-      const previewContainer = document.getElementById("imagePreview");
-      const previewImage = previewContainer.querySelector(
-        ".image-preview__image"
-      );
-      const previewDefaultText = previewContainer.querySelector(
-        ".image-preview__default-text"
-      );
-
-      inpFile.addEventListener("change", function () {
-        const file = this.files[0];
-
-        if (file) {
-          const reader = new FileReader();
-
-          previewDefaultText.style.display = "none";
-          previewImage.style.display = "block";
-
-          reader.addEventListener("load", function () {
-            previewImage.setAttribute("src", this.result);
-          });
-
-          reader.readAsDataURL(file);
-        } else {
-          previewDefaultText.style.display = null;
-          previewImage.style.display = null;
-          previewImage.setAttribute("src", "");
-        }
-      });
-    </script>

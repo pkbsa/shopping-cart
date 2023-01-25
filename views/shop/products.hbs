@@ -1,29 +1,28 @@
-
-<div class="row">
-    <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
-        <div id="success" class="alert alert-success"{{#if noMessages}}hidden{{/if}}>
-            {{successMsg}}
-        </div>
-    </div>
-</div>
-
-{{#each products}}
-<div class="row">
-    {{#each this}}
-    {{property}}
-    <div class="col-sm-6 col-md-4">
-        <div class="thumbnail">
-            <img src="{{ this.imagePath }}" alt="..." class="img-responsive">
-            <div class="caption">
-                <h3>{{this.title}}</h3>
-                <p class="description">{{this.description}}</p>
-                <div class="clearfix">
-                    <div class="price pull-left">$ {{this.price}}</div>
-                    <a href="/add-to-cart/{{this._id}}" class="btn btn-success pull-right" role="button">Button</a>
-                </div>
+<div class="page page-products">
+    <div class="row">
+        <div class="col-sm-6 col-md-4 col-md-offset-4 col-sm-offset-3">
+            <div id="success" class="alert alert-success"{{#if noMessages}}hidden{{/if}}>
+                {{successMsg}}
             </div>
         </div>
     </div>
-    {{/each}}
+    <h1>Our Products</h1>
+    <h2>สินค้าของเราถูกสร้างมาจากใจ และ ได้รับการการันตีคุณภาพ</h2>
+    <div class="main">
+        {{#each products}}
+            {{property}}
+            <div class="col-md-6 col-l-4 col-xl-3 middle">
+                <div class="thumbnail">
+                    <img src="{{ this.imagePath }}" alt="..." class="img-responsive">
+                    <div class="caption">
+                        <h3>{{this.title}}</h3>
+                        <div class="clearfix">
+                            <div class="price pull-left">{{this.price}}.00 บาท</div>
+                            <a href="/add-to-cart/{{this._id}}" class="pull-right">ADD TO CART</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {{/each}}
+    </div>
 </div>
-{{/each}}

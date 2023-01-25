@@ -28,7 +28,7 @@ router.get("/products", function (req, res, next) {
     }
     res.render("shop/products", {
       title: "Shopping Cart",
-      products: productChunk,
+      products: docs,
       successMsg: successMsg || null,
       noMessages: !successMsg
     });
@@ -47,6 +47,21 @@ router.get("/add-to-cart/:id", function (req, res, next) {
     req.session.cart = cart;
     console.log(req.session.cart);
     res.redirect("/products");
+  });
+});
+
+router.get("/addone-to-cart/:id", function (req, res, next) {
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  Product.findById(productId, function (err, product) {
+    if (err) {
+      return res.redirect("/products");
+    }
+    cart.add(product, product.id);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect("/shopping-cart");
   });
 });
 
@@ -69,6 +84,7 @@ router.get('/reduce/:id', function(req, res, next){
 });
 
 
+
 router.get("/shopping-cart", function (req, res, next) {
   if (!req.session.cart) {
     return res.render("shop/shopping-cart", { products: null });
@@ -84,19 +100,11 @@ router.get("/checkout",isLoggedIn,function (req, res, next) {
   if (!req.session.cart) {
     return res.redirect("/shopping-cart");
   }
-  const mobileNumber = "085-525-9987";
-  const IDCardNumber = "0-0000-00000-00-0";
   var cart = new Cart(req.session.cart);
-  const amount = cart.totalPrice;
-  const payload = generatePayload(mobileNumber, { amount });
-  // Convert to SVG QR Code
-  const options = { type: "svg", color: { dark: "#000", light: "#fff" } };
-  qrcode.toString(payload, options, (err, svg) => {
-    if (err) return console.log(err);
-    console.log(payload)
-    fs.writeFileSync("./public/QR/"+payload+".svg", svg);
+  res.render("shop/checkout", { products: cart.generateArray(),
+    total: cart.totalPrice+30,
+    users: req.user,
   });
-  res.render("shop/checkout", { total: cart.totalPrice, QRPath: payload});
 });
 
 router.post('/checkout',isLoggedIn, function(req, res, next){
