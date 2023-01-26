@@ -186,9 +186,23 @@ body {
 .page-profile .btn-primary{
     height: 4em;
 }
+.page-profile .Pending{
+    background-color: rgb(234, 221, 83);
+}
+.page-profile .Finish{
+    background-color: rgb(46, 149, 22);
+}
+.page-profile .Cancel{
+    background-color: rgb(183, 36, 36);
+}
 .page-profile .accordion-header button{
     font-size: 0.62em;
     border: solid 1px rgb(174, 172, 172);
+}
+.page-profile .accordion-body{
+    border: solid 1px rgb(208, 203, 203);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 .page-profile .accordion-body p {
     font-size: 1.5em;
@@ -201,6 +215,10 @@ body {
 }
 .page-products{
     gap: 2em
+}
+
+.page-products .width{
+    width: 25%;
 }
 
 .page-products .thumbnail{
@@ -364,8 +382,13 @@ body {
     display: flex;
     flex-direction: column;
     width: 35vw;
-    overflow: scroll    ;
+    
+}
+.page-checkout .flex-column-insum{
+    display: flex;
+    flex-direction: column;
     background-color: rgb(243, 240, 240);
+    overflow: scroll;
     padding: 1em 2em 1em 2em;
     border-radius: 10px;
 }
@@ -457,7 +480,6 @@ body {
     display: flex;
     flex-direction: row;
     gap:2em;
-    background-color: #ffffff;
     padding: 2em;
     border-radius: 2px;
     justify-content: space-between;
@@ -479,6 +501,11 @@ body {
     gap:5em;
     align-items: center;
     font-size: 2em;
+    justify-content: space-between;
+}
+.page-checkout .flex-row-3 h4{
+   font-size: 0.85em;
+   color: #5d5d5d;
 }
 
 .page-checkout .flex-row-2 h2{
@@ -579,6 +606,20 @@ body {
         width: 70vw;
         height: auto;
     }
+    .page-checkout .flex-row1{
+        flex-direction: column;
+        align-items: center ;
+        height: auto;
+    }
+    .page-checkout .flex-column{
+        width: 90vw;
+        overflow: visible;
+    }
+    .page-checkout .flex-column-sum{
+        width: 90vw;
+        overflow: visible;
+        margin-bottom: 2em;
+    }
 }
 @media (max-width: 768px){
     .page-products .col-md-6 {
@@ -669,6 +710,9 @@ body {
     }
     .price{
         font-size: 2vmin !important;
+    }
+    .page-cart .total{
+        padding: 0;
     }
 }
 

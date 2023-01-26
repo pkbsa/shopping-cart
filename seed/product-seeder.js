@@ -8,33 +8,17 @@ var products = [
     new Product({
         imagePath: '/products/product1.jpg',
         title: 'พวงกุญแจ กล้วย',
-        description: 'Very Awesome Video Game Part 1',
-        price: 10
+        description: 'พวงกุญแจ น้องกล้วย ลายหน้าใหญ่ผลิตออกมาแค่จำนวนจำกัด',
+        price: 79,
+        status: "Available"
     }),
     new Product({
         imagePath: '/products/product2.jpg',
         title: 'พวงกุญแจ การ์ตูน',
-        description: 'Very Awesome Video Game Part 2',
-        price: 10
+        description: 'พวงกุญแจ น้องกล้วย ลายการ์ตูนผลิตออกมาแค่จำนวนจำกัด',
+        price: 69,
+        status: "Available",
     }),
-    new Product({
-        imagePath: '/products/product2.jpg',
-        title: 'พวงกุญแจ การ์ตูน',
-        description: 'Very Awesome Video Game Part 2',
-        price: 10
-    }),
-    new Product({
-        imagePath: '/products/product2.jpg',
-        title: 'พวงกุญแจ การ์ตูน',
-        description: 'Very Awesome Video Game Part 2',
-        price: 10
-    }),
-    new Product({
-        imagePath: '/products/product2.jpg',
-        title: 'พวงกุญแจ การ์ตูน',
-        description: 'Very Awesome Video Game Part 2',
-        price: 10
-    })
 ]
 
 var done = 0;

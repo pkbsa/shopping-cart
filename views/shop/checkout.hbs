@@ -9,58 +9,63 @@
                     <div class="fields fields--2">
                         <label class="field">
                             <span class="field__label" for="firstname">First name<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="firstname" name="firstname"
-                                value="{{this.users.firstname}}" />
+                            <input class="field__input" type="text" id="firstname" name="firstname" placeholder="Firstname"
+                                value="{{this.users.firstname}}" required />
                         </label>
                         <label class="field">
                             <span class="field__label" for="lastname">Last name<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="lastname" name="lastname"
-                                value="{{this.users.lastname}}" />
+                            <input class="field__input" type="text" id="lastname" name="lastname" placeholder="Lastname"
+                                value="{{this.users.lastname}}" required/>
                         </label>
                     </div>
                     <label class="field">
                         <span class="field__label" for="address">Address<span class="required">*</span></span>
-                        <input class="field__input" id="address" type="text" name="address"
-                            value="{{this.users.address}}" />
+                        <input class="field__input" id="address" type="text" name="address" placeholder="1/1 House, Thanaon Rd"
+                            value="{{this.users.address}}" required/>
                     </label>
                     <div class="fields fields--2">
                         <label class="field">
                             <span class="field__label" for="subdistrict">แขวง / ตำบล<span
                                     class="required">*</span></span>
-                            <input class="field__input" type="text" id="subdistrict" name="subdistrict"
-                                value="{{this.users.subdistrict}}" />
+                            <input class="field__input" type="text" id="subdistrict" name="subdistrict" placeholder="Sub-District"
+                                value="{{this.users.subdistrict}}" required/>
                         </label>
                         <label class="field">
                             <span class="field__label" for="district">เขต / อำเภอ<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="district" name="district"
-                                value="{{this.users.district}}" />
+                            <input class="field__input" type="text" id="district" name="district" placeholder="District"
+                                value="{{this.users.district}}" required/>
                         </label>
                     </div>
                     <div class="fields fields--2">
                         <label class="field">
                             <span class="field__label" for="province">จังหวัด<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="province" name="province"
-                                value="{{this.users.province}}" />
+                            <input class="field__input" type="text" id="province" name="province" placeholder="Bangkok"
+                                value="{{this.users.province}}" required/>
                         </label>
                         <label class="field">
                             <span class="field__label" for="zipcode">ZIP CODE<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="zipcode" name="zipcode"
-                                value="{{this.users.zipcode}}" />
+                            <input class="field__input" type="text" id="zipcode" name="zipcode" pattern="[0-9]{5}" placeholder="10000"
+                                value="{{this.users.zipcode}}" required/>
                         </label>
                     </div>
+                     <label class="field">
+                            <span class="field__label" for="phone">เบอร์โทรศัพท์<span class="required">*</span></span>
+                            <input class="field__input" type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="08X-XXX-XXXX"
+                                value="{{this.users.phone}}" required/>
+                     </label>
                 </div>
                 <div class="tab">
                     <label class="field1">เลือกวิธีชำระเงิน</label>
                     <div class="payment-info">
-                        <input type="radio" id="html" name="fav_language" value="HTML">
-                        <label for="html" class="field2">โอนธนาคาร (Siranut Akarawuthi)</label><br>
+                        <input type="radio" id="Bank" name="paymentMethod" value="Bank" checked>
+                        <label for="Bank" class="field2">โอนธนาคาร (Siranut Akarawuthi)</label><br>
                         <ul>
                             <li>กรุงศรี : 649-1-0497804</li>
                             <li>ไทยพาณิชย์ : 038-474665-3</li>
                             <li>กสิกร : 033-1-67481-8</li>
                         </ul>
-                        <input type="radio" id="html" name="fav_language" value="HTML">
-                        <label for="html" class="field2">True Wallet</label><br>
+                        <input type="radio" id="TW" name="paymentMethod" value="True Wallet">
+                        <label for="True" class="field2">True Wallet</label><br>
                         <ul>
                             <li>085-525-9987</li>
                         </ul>
@@ -68,18 +73,18 @@
                      <div class="fields fields--2">
                         <label class="field">
                             <span class="field__label" for="province">วันที่ชำระเงิน<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="province" name="province"
-                                placeholder="13/01/2023"/>
+                            <input class="field__input" type="text" id="date" name="date"
+                                placeholder="13/01/2023" pattern="[0-9]{2}/[0-9]{2}/[0-9]{4}" required/>
                         </label>
                         <label class="field">
-                            <span class="field__label" for="zipcode">เวลา<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="zipcode" name="zipcode"
-                                placeholder="17.01"/>
+                            <span class="field__label" for="time">เวลา<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="time" name="time"
+                                placeholder="17.01" pattern="[0-9]{2}.[0-9]{2}" required/>
                         </label>
                     </div>
                     <div class="mb-3">
                         <label for="formFile" class="form-label">อัพโหลดหลักฐานการชำระเงิน</label>
-                        <input class="form-control-lg" type="file" name="sampleFile" accept="image/*" id="formFile">
+                        <input class="form-control-lg" type="file" name="sampleFile" accept="image/*" id="formFile" required>
                     </div>
                 </div>
                 <div class='middle' style="overflow:auto;">
@@ -99,32 +104,37 @@
             </form>
         </div>
         <div class="flex-column-sum">
-            <h3>คำสั่งซื้อ</h3>
-            <div class="flex-column-1">
-                {{#each products}}
-                <div class="flex-row-1">
-                    <div class="flex-row-2">
-                        <img src="{{this.item.imagePath}}">
-                        <div>
-                            <h2>{{this.item.title}}</h2>
-                            <p id="price">ราคา : {{this.item.price}} บาท ({{this.qty}} ชิ้น)</p>
+            <div class="flex-column-insum">
+                <h3 class="field1">คำสั่งซื้อ</h3>
+                <div class="flex-column-1">
+                    {{#each products}}
+                    <div class="flex-row-1">
+                        <div class="flex-row-2">
+                            <img src="{{this.item.imagePath}}">
+                            <div>
+                                <h2>{{this.item.title}}</h2>
+                                <p id="price">ราคา : {{this.item.price}} บาท ({{this.qty}} ชิ้น)</p>
+                            </div>
+                        </div>
+                        <div class="flex-column-below">
+
+                            <h3>{{this.price}}.00 บาท</h3>
                         </div>
                     </div>
-                    <div class="flex-column-below">
+                    {{/each}}
+                    <hr>
 
-                        <h3>{{this.price}}.00 บาท</h3>
-                    </div>
-                </div>
-                {{/each}}
-                <hr>
-
-                <div class="flex-row-1 total pad-top">
-                    <h5> </h5>
-                    <div class="flex-coloumn-1">
-                        <p>ค่าส่ง 30 บาท</p>
-                        <div class="flex-row-3">
-                            <h3>Subtotal </h3>
-                            <h3>{{total}}.00 บาท</h3>
+                    <div class="flex-row-1 total pad-top">
+                        <h5> </h5>
+                        <div class="flex-column-2">
+                             <div class="flex-row-3">
+                                <h4>ค่าส่ง </h4>
+                                <h4>30.00 บาท</h4>
+                            </div>
+                            <div class="flex-row-3">
+                                <h3>Subtotal </h3>
+                                <h3>{{total}}.00 บาท</h3>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -132,3 +142,4 @@
         </div>
     </div>
 </div>
+<script src='/stylesheets/tab.js'></script>

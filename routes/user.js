@@ -41,6 +41,7 @@ router.post("/edit-profile", isLoggedIn, function (req, res, next) {
       district: req.body.district,
       province: req.body.province,
       zipcode: req.body.zipcode,
+      phone: req.body.phone,
     } },
     function (err, res) {
       if(err){

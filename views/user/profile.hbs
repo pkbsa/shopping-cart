@@ -7,11 +7,11 @@
                 <div class="fields fields--2">
                     <label class="field">
                         <span class="field__label" for="firstname">First name<span>
-                        <input class="field__input" type="text" id="firstname" name="firstname" value="{{this.users.firstname}}" />
+                        <input class="field__input" type="text" id="firstname" name="firstname" value="{{this.users.firstname}}" placeholder="Firstname"/>
                     </label>
                     <label class="field">
                         <span class="field__label" for="lastname">Last name</span>
-                        <input class="field__input" type="text" id="lastname" name="lastname" value="{{this.users.lastname}}" />
+                        <input class="field__input" type="text" id="lastname" name="lastname" value="{{this.users.lastname}}" placeholder="Lastname"/>
                     </label>
                 </div>
                 <label class="field">
@@ -20,28 +20,32 @@
                 </label>
                 <label class="field">
                     <span class="field__label" for="address">Address</span>
-                    <input class="field__input" id="address" type="text" name="address" value="{{this.users.address}}" />
+                    <input class="field__input" id="address" type="text" name="address" value="{{this.users.address}}" placeholder="1/1 House, Thanaon Rd"/>
                 </label>
                 <div class="fields fields--2">
                     <label class="field">
                         <span class="field__label" for="subdistrict">แขวง / ตำบล</span>
-                        <input class="field__input" type="text" id="subdistrict" name="subdistrict" value="{{this.users.subdistrict}}" />
+                        <input class="field__input" type="text" id="subdistrict" name="subdistrict" value="{{this.users.subdistrict}}" placeholder="Sub-District" />
                     </label>
                     <label class="field">
                         <span class="field__label" for="district">เขต / อำเภอ</span>
-                        <input class="field__input" type="text" id="district" name="district" value="{{this.users.district}}" />
+                        <input class="field__input" type="text" id="district" name="district" value="{{this.users.district}}" placeholder="District" />
                     </label>
                 </div>
                 <div class="fields fields--2">
                     <label class="field">
                         <span class="field__label" for="province">จังหวัด</span>
-                        <input class="field__input" type="text" id="province" name="province" value="{{this.users.province}}" />
+                        <input class="field__input" type="text" id="province" name="province" value="{{this.users.province}}" placeholder="Bangkok" />
                     </label>
                     <label class="field">
                         <span class="field__label" for="zipcode">ZIP CODE</span>
-                        <input class="field__input" type="text" id="zipcode" name="zipcode" value="{{this.users.zipcode}}" />
+                        <input class="field__input" type="text" id="zipcode" name="zipcode" pattern="[0-9]{5}" value="{{this.users.zipcode}}" placeholder="00000" />
                     </label>
                 </div>
+                <label class="field">
+                    <span class="field__label" for="phone">เบอร์โทรศัพท์</span>
+                    <input class="field__input" type="tel" name="phone" value="{{this.users.phone}}" id="phone" placeholder="08X-XXX-XXXX" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"/>
+                </label>
                 <input type="hidden" name="_csrf" value="{{ csrfToken }}">
                 <input type="hidden" name="email" value="{{ this.users.email }}">
                 <button class="btn btn-primary" type="submit">Save Change</button>
@@ -64,23 +68,26 @@
                         <div class="accordion-body">
                             <p>วันที่สั่ง : {{this.date}}</p>
                             <p>สถานะ : 
-                                <button class="btn btn-warning">รออนุมัติ</button>
-                               
+                                <button  class="btn {{this.status}}">Wait</button>
                             </p>
-                            <p>ตระกร้า :</p>
+                            <p>ตะกร้า :</p>
                             <div class="panel panel-default">
                                 <div class="panel-body">
                                     <ul class="list-group">
                                         {{#each this.items}}
                                         <li class="list-group-item">
-                                            <span class="badge">{{this.price}} บาท</span>
+                                            <span class="badge">{{this.price}}.00 บาท</span>
                                             {{this.item.title}} ( จำนวน : {{this.qty}} ชิ้น )
                                         </li>
                                         {{/each}}
+                                        <li class="list-group-item">
+                                            <span class="badge">30.00 บาท</span>
+                                            ค่าส่ง
+                                        </li>
                                     </ul>
                                 </div>
                                 <div class="panel-footer">
-                                    รวมทั้งหมด <strong>{{this.cart.totalPrice}} บาท </strong>
+                                    รวมทั้งหมด <strong>{{this.cart.totalPrice}}.00 บาท </strong>
                                 </div>
                             </div>
                         </div>
@@ -91,3 +98,4 @@
         </div>
     </div>
 </div>
+<script src='/stylesheets/profile.js'></script>

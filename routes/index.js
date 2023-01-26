@@ -21,16 +21,18 @@ router.get("/", function (req, res, next) {
 router.get("/products", function (req, res, next) {
   var successMsg = req.flash('success')[0];
   Product.find(function (err, docs) {
-    var productChunk = [];
+    var remainLength = 4-(docs.length%4);
+    var remainDiv = [];
     var chunkSize = 3;
-    for (var i = 0; i < docs.length; i += chunkSize) {
-      productChunk.push(docs.slice(i, i + chunkSize));
+    for (var i = 0; i < remainLength; i++) {
+      remainDiv.push(i);
     }
     res.render("shop/products", {
       title: "Shopping Cart",
       products: docs,
       successMsg: successMsg || null,
-      noMessages: !successMsg
+      noMessages: !successMsg,
+      remainDiv: remainDiv
     });
   });
 });
@@ -102,7 +104,7 @@ router.get("/checkout",isLoggedIn,function (req, res, next) {
   }
   var cart = new Cart(req.session.cart);
   res.render("shop/checkout", { products: cart.generateArray(),
-    total: cart.totalPrice+30,
+    total: cart.totalPriceç,
     users: req.user,
   });
 });
@@ -111,6 +113,7 @@ router.post('/checkout',isLoggedIn, function(req, res, next){
   if (!req.session.cart) {
     return res.redirect("/shopping-cart");
   }
+  console.log(req.body)
 
   var cart = new Cart(req.session.cart);
 
@@ -133,24 +136,39 @@ router.post('/checkout',isLoggedIn, function(req, res, next){
     month: "numeric",
     year: "numeric"
   });
+  
+  const address = req.body.address + " " + req.body.subdistrict + " "+ req.body.district+ " "+ req.body.province +" "+req.body.zipcode;
+  const fullname = req.body.firstname + " " + req.body.lastname;
+  const paymentDate = req.body.date + " - " + req.body.time;
 
   var order = new Order({
     user: req.user,
     cart: cart,
-    address: req.body.address,
-    name: req.body.name,
+    address: address,
+    name: fullname,
     phone: req.body.phone,
     paymentId: sampleFile.name,
+    paymentDate : paymentDate ,
+    paymentMethod: req.body.paymentMethod,
     status: "Pending",
     date: date
   });
+
+  //console.log(cart)
+  // for (let id in cart.items) {
+  //   Product.updateOne({_id: id},{$inc: { qty:  -cart.items[id].qty }},function(err,res){
+  //     if (err) throw err;
+  //     console.log(cart.items[id].qty+" item updated");
+  //   })
+  // }
+
   order.save(function(err, result){
     if (err){ 
       console.log(err)
     }
     req.flash('success', 'Sucessfully brought product!') 
     req.session.cart = null;
-    res.redirect('/products');
+    res.redirect('/user/profile');
   })
 })
 

@@ -12,6 +12,7 @@ var userSchema = new Schema({
     district: {type: String, required: false},
     province: {type: String, required: false},
     zipcode: {type: String, required: false},
+    phone: {type: String, required: false},
     admin: {type: Number, required: true}
 });
 userSchema.methods.encryptPassword = function(password){
