@@ -7,21 +7,22 @@ var qrcode = require("qrcode");
 var fs = require("fs");
 
 var Product = require("../models/product");
-var Order = require('../models/order');
+var Order = require("../models/order");
+
+const axios = require("axios");
+const FormData = require("form-data");
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
-  
-    res.render("shop/index", {
-      title: "Shopping Cart"
-    });
- 
+  res.render("shop/index", {
+    title: "Shopping Cart",
+  });
 });
 
 router.get("/products", function (req, res, next) {
-  var successMsg = req.flash('success')[0];
+  var successMsg = req.flash("success")[0];
   Product.find(function (err, docs) {
-    var remainLength = 4-(docs.length%4);
+    var remainLength = 4 - (docs.length % 4);
     var remainDiv = [];
     var chunkSize = 3;
     for (var i = 0; i < remainLength; i++) {
@@ -32,7 +33,7 @@ router.get("/products", function (req, res, next) {
       products: docs,
       successMsg: successMsg || null,
       noMessages: !successMsg,
-      remainDiv: remainDiv
+      remainDiv: remainDiv,
     });
   });
 });
@@ -62,30 +63,28 @@ router.get("/addone-to-cart/:id", function (req, res, next) {
     }
     cart.add(product, product.id);
     req.session.cart = cart;
-    console.log(req.session.cart);
+    //console.log(req.session.cart);
     res.redirect("/shopping-cart");
   });
 });
 
-router.get('/remove/:id', function(req, res, next){
+router.get("/remove/:id", function (req, res, next) {
   var productId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
 
   cart.removeItem(productId);
   req.session.cart = cart;
-  res.redirect('/shopping-cart');
+  res.redirect("/shopping-cart");
 });
 
-router.get('/reduce/:id', function(req, res, next){
+router.get("/reduce/:id", function (req, res, next) {
   var productId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
 
   cart.reduceByOne(productId);
   req.session.cart = cart;
-  res.redirect('/shopping-cart');
+  res.redirect("/shopping-cart");
 });
-
-
 
 router.get("/shopping-cart", function (req, res, next) {
   if (!req.session.cart) {
@@ -98,46 +97,63 @@ router.get("/shopping-cart", function (req, res, next) {
   });
 });
 
-router.get("/checkout",isLoggedIn,function (req, res, next) {
+router.get("/checkout", isLoggedIn, function (req, res, next) {
   if (!req.session.cart) {
     return res.redirect("/shopping-cart");
   }
   var cart = new Cart(req.session.cart);
-  res.render("shop/checkout", { products: cart.generateArray(),
-    total: cart.totalPriceç,
+  res.render("shop/checkout", {
+    products: cart.generateArray(),
+    total: cart.totalPrice,
     users: req.user,
   });
 });
 
-router.post('/checkout',isLoggedIn, function(req, res, next){
+router.post("/checkout", isLoggedIn, function (req, res, next) {
   if (!req.session.cart) {
     return res.redirect("/shopping-cart");
   }
-  console.log(req.body)
-
   var cart = new Cart(req.session.cart);
+
+  const cartArray = cart.generateArray();
+  const itemsString = cartArray
+    .map((item) => `${item.item.title} x ${item.qty} - ${item.price} บาท`)
+    .join("\n");
 
   let sampleFile;
   let uploadFile;
 
-  console.log(req.files.sampleFile)
+  //console.log(req.files.sampleFile)
   sampleFile = req.files.sampleFile;
-  uploadFile = './public/Slip/' + sampleFile.name;
+  uploadFile = "./public/Slip/" + sampleFile.name;
 
   sampleFile.mv(uploadFile);
-  
+
   const today = new Date();
   const offset = -(today.getTimezoneOffset() / 60) + 7;
   const thaiDate = new Date(today.getTime() + offset * 60 * 60 * 1000);
-  const date = thaiDate.toLocaleString("th-TH", {
-    hour: "numeric",
-    minute: "numeric",
+  const date = thaiDate.toLocaleDateString("th-TH", {
     day: "numeric",
     month: "numeric",
-    year: "numeric"
+    year: "numeric",
   });
-  
-  const address = req.body.address + " " + req.body.subdistrict + " "+ req.body.district+ " "+ req.body.province +" "+req.body.zipcode;
+  const time = thaiDate.toLocaleTimeString("th-TH", {
+    hour: "numeric",
+    minute: "numeric",
+  });
+
+  var curDate = `${date} - ${time}`;
+
+  const address =
+    req.body.address +
+    " " +
+    req.body.subdistrict +
+    " " +
+    req.body.district +
+    " " +
+    req.body.province +
+    " " +
+    req.body.zipcode;
   const fullname = req.body.firstname + " " + req.body.lastname;
   const paymentDate = req.body.date + " - " + req.body.time;
 
@@ -148,10 +164,10 @@ router.post('/checkout',isLoggedIn, function(req, res, next){
     name: fullname,
     phone: req.body.phone,
     paymentId: sampleFile.name,
-    paymentDate : paymentDate ,
+    paymentDate: paymentDate,
     paymentMethod: req.body.paymentMethod,
     status: "Pending",
-    date: date
+    date: curDate,
   });
 
   //console.log(cart)
@@ -161,17 +177,39 @@ router.post('/checkout',isLoggedIn, function(req, res, next){
   //     console.log(cart.items[id].qty+" item updated");
   //   })
   // }
+  var payload = `\nวันที่สั่ง : ${order.date}\n\n${itemsString}\n\nวันที่ชำระเงิน : ${order.paymentDate}\nวิธีการชำระเงิน : ${order.paymentMethod}\nจำนวน : ${order.cart.totalPrice}.00 บาท\n\nที่อยู่จัดส่ง\n${order.name}\n${order.address}`;
 
-  order.save(function(err, result){
-    if (err){ 
-      console.log(err)
+  const formData = new FormData();
+  formData.append("imageFile", fs.createReadStream(uploadFile));
+  formData.append("message", `${payload}`);
+  formData.append(
+    "access_token",
+    "Eowx3XT2qK5FJf0PQ5BRdFJM80b5hIDx6l55OZ4uEOn"
+  );
+
+  setTimeout(function () {
+    axios
+      .post("https://notify-api.line.me/api/notify", formData, {
+        headers: {
+          Authorization: "Bearer Eowx3XT2qK5FJf0PQ5BRdFJM80b5hIDx6l55OZ4uEOn",
+        },
+      })
+      .then((response) => {
+        //console.log(response.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, 3000);
+
+  order.save(function (err, result) {
+    if (err) {
+      console.log(err);
     }
-    req.flash('success', 'Sucessfully brought product!') 
     req.session.cart = null;
-    res.redirect('/user/profile');
-  })
-})
-
+    res.redirect("/user/profile");
+  });
+});
 
 module.exports = router;
 
@@ -180,6 +218,6 @@ function isLoggedIn(req, res, next) {
     return next();
   }
   req.session.oldUrl = req.originalUrl;
-  console.log(req.session.oldUrl)
+  console.log(req.session.oldUrl);
   res.redirect("/user/signin");
 }

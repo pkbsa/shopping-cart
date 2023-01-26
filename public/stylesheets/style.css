@@ -230,6 +230,9 @@ body {
     width: 20vw;
     object-fit: cover;
 }
+.page-products a.notAvailable{
+    color: red;
+}
 .page-products .main .middle{
     display: flex;
     justify-content: center;

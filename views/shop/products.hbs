@@ -18,7 +18,7 @@
                         <h3>{{this.title}}</h3>
                         <div class="clearfix">
                             <div class="price pull-left">{{this.price}}.00 บาท</div>
-                            <a href="/add-to-cart/{{this._id}}" class="pull-right">ADD TO CART</a>
+                            <a href="/add-to-cart/{{this._id}}" class="pull-right {{this.status}}">ADD TO CART</a>
                         </div>
                     </div>
                 </div>
@@ -42,3 +42,4 @@
         {{/each}}
     </div>
 </div>
+<script src='/stylesheets/products.js'></script>

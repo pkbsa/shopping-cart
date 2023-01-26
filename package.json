@@ -8,6 +8,7 @@
   "dependencies": {
     "@handlebars/allow-prototype-access": "^1.0.5",
     "age-check": "^1.0.0",
+    "axios": "^1.2.5",
     "bcrypt-nodejs": "^0.0.3",
     "body-parser": "~1.13.2",
     "connect-flash": "^0.1.1",
