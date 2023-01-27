@@ -475,6 +475,9 @@ body {
 .page-checkout .required{
     color: red;
 }
+.page-checkout .red{
+    border: solid 1px red;
+}
 .page-checkout img{
     width: 50px;
     height: 50px;

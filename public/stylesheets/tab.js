@@ -12,15 +12,14 @@ function showTab(n) {
     document.getElementById("prevBtn").style.display = "inline";
   }
   var nextBtn = document.getElementById("nextBtn");
-  if (n == (x.length - 1)) {
+  if (n == x.length - 1) {
     nextBtn.innerHTML = "Submit";
     setTimeout(() => {
-      nextBtn.setAttribute('type', 'submit');
+      nextBtn.setAttribute("type", "submit");
     }, 500);
-    
   } else {
     nextBtn.innerHTML = "Next";
-    nextBtn.setAttribute('type', 'button');
+    nextBtn.setAttribute("type", "button");
   }
   // ... and run a function that displays the correct step indicator:
 }
@@ -38,9 +37,9 @@ function nextPrev(n) {
   if (currentTab >= x.length) {
     //...the form gets submitted:
     if (validateForm()) {
-        //...the form gets submitted:
-        document.getElementById("myForm").submit();
-      }
+      //...the form gets submitted:
+      document.getElementById("myForm").submit();
+    }
     return false;
   }
   showTab(currentTab);
@@ -55,6 +54,7 @@ function validateForm() {
     valid = true;
   x = document.getElementsByClassName("tab");
   y = x[currentTab].getElementsByTagName("input");
+  
   // A loop that checks every input field in the current tab:
   for (i = 0; i < y.length; i++) {
     // If a field is empty...
@@ -65,6 +65,32 @@ function validateForm() {
       valid = false;
     }
   }
+
+  let zipcode = document.getElementById("zipcode");
+  let zipCodeRegex = /^[0-9]{5}$/;
+  let phone = document.getElementById("phone");
+  let phoneRegex = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+
+  if (!zipCodeRegex.test(zipcode.value)) {
+    zipcode.className += " invalid"
+    valid = false
+    let zipcodeField = document.getElementById('zipcodefield')
+    zipcodeField.className += ' red'
+  }else{
+    let zipcodeField = document.getElementById('zipcodefield')
+    zipcodeField.className = 'field'
+  }
+  if (!phoneRegex.test(phone.value)) {
+    phone.className += " invalid"
+    valid = false
+    let phoneField = document.getElementById('phonefield')
+    phoneField.className += ' red'
+  }else{
+    let phoneField = document.getElementById('phonefield')
+    phoneField.className = 'field'
+  }
+  
+
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
     document.getElementsByClassName("step")[currentTab].className += " finish";

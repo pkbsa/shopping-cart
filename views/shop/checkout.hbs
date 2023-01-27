@@ -42,13 +42,13 @@
                             <input class="field__input" type="text" id="province" name="province" placeholder="Bangkok"
                                 value="{{this.users.province}}" required/>
                         </label>
-                        <label class="field">
+                        <label class="field" id="zipcodefield">
                             <span class="field__label" for="zipcode">ZIP CODE<span class="required">*</span></span>
                             <input class="field__input" type="text" id="zipcode" name="zipcode" pattern="[0-9]{5}" placeholder="10000"
                                 value="{{this.users.zipcode}}" required/>
                         </label>
                     </div>
-                     <label class="field">
+                     <label class="field" id="phonefield">
                             <span class="field__label" for="phone">เบอร์โทรศัพท์<span class="required">*</span></span>
                             <input class="field__input" type="tel" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" placeholder="08X-XXX-XXXX"
                                 value="{{this.users.phone}}" required/>

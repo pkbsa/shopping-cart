@@ -200,7 +200,7 @@ router.post("/checkout", isLoggedIn, function (req, res, next) {
       .catch((error) => {
         console.log(error);
       });
-  }, 3000);
+  }, 8000);
 
   order.save(function (err, result) {
     if (err) {
