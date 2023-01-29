@@ -32,3 +32,13 @@ or
 ```
 node app.js
 ```
+
+Snapshot of the website : 
+<img src="./img/img1.png" alt="img1">
+<img src="./img/img2.png" alt="img2">
+<img src="./img/img3.png" alt="img3">
+<img src="./img/img4.png" alt="img4">
+<img src="./img/img5.png" alt="img5">
+<img src="./img/img6.png" alt="img6">
+<img src="./img/img7.png" alt="img7">
+<img src="./img/img8.png" alt="img8">
