@@ -60,16 +60,56 @@ function validateForm() {
     // If a field is empty...
     if (y[i].value == "") {
       // add an "invalid" class to the field:
-      y[i].className += " invalid";
+      y[i].className = "field__input invalid";
       // and set the current valid status to false:
       valid = false;
+    }else{
+      y[i].className = "field__input";
     }
   }
 
+  let Fname = document.getElementById('firstname');
+  let Lname = document.getElementById('lastname');
+  let Address = document.getElementById('address');
+  let Subdistrict = document.getElementById('subdistrict');
+  let District = document.getElementById('district');
+  let Province = document.getElementById('province');
   let zipcode = document.getElementById("zipcode");
-  let zipCodeRegex = /^[0-9]{5}$/;
   let phone = document.getElementById("phone");
+
+  let zipCodeRegex = /^[0-9]{5}$/;
   let phoneRegex = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+
+  if(Fname.classList.contains('invalid')){
+    document.getElementById('fnameField').className = 'field red'
+  }else{
+    document.getElementById('fnameField').className = 'field'
+  }
+  if(Lname.classList.contains('invalid')){
+    document.getElementById('lnameField').className = 'field red'
+  }else{
+    document.getElementById('lnameField').className = 'field'
+  }
+  if(Address.classList.contains('invalid')){
+    document.getElementById('addressField').className = 'field red'
+  }else{
+    document.getElementById('addressField').className = 'field'
+  }
+  if(Subdistrict.classList.contains('invalid')){
+    document.getElementById('subdistrictField').className = 'field red'
+  }else{
+    document.getElementById('subdistrictField').className = 'field'
+  }
+  if(District.classList.contains('invalid')){
+    document.getElementById('districtField').className = 'field red'
+  }else{
+    document.getElementById('districtField').className = 'field'
+  }
+  if(Province.classList.contains('invalid')){
+    document.getElementById('provinceField').className = 'field red'
+  }else{
+    document.getElementById('provinceField').className = 'field'
+  }
 
   if (!zipCodeRegex.test(zipcode.value)) {
     zipcode.className += " invalid"
@@ -89,8 +129,6 @@ function validateForm() {
     let phoneField = document.getElementById('phonefield')
     phoneField.className = 'field'
   }
-  
-
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
     document.getElementsByClassName("step")[currentTab].className += " finish";

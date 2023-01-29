@@ -7,37 +7,37 @@
                 <div class="tab">
                     <label class="field1">ที่อยู่จัดส่ง</label>
                     <div class="fields fields--2">
-                        <label class="field">
+                        <label class="field" id="fnameField">
                             <span class="field__label" for="firstname">First name<span class="required">*</span></span>
                             <input class="field__input" type="text" id="firstname" name="firstname" placeholder="Firstname"
                                 value="{{this.users.firstname}}" required />
                         </label>
-                        <label class="field">
+                        <label class="field" id="lnameField" >
                             <span class="field__label" for="lastname">Last name<span class="required">*</span></span>
                             <input class="field__input" type="text" id="lastname" name="lastname" placeholder="Lastname"
                                 value="{{this.users.lastname}}" required/>
                         </label>
                     </div>
-                    <label class="field">
+                    <label class="field"  id="addressField">
                         <span class="field__label" for="address">Address<span class="required">*</span></span>
                         <input class="field__input" id="address" type="text" name="address" placeholder="1/1 House, Thanaon Rd"
                             value="{{this.users.address}}" required/>
                     </label>
                     <div class="fields fields--2">
-                        <label class="field">
+                        <label class="field" id="subdistrictField" >
                             <span class="field__label" for="subdistrict">แขวง / ตำบล<span
                                     class="required">*</span></span>
                             <input class="field__input" type="text" id="subdistrict" name="subdistrict" placeholder="Sub-District"
                                 value="{{this.users.subdistrict}}" required/>
                         </label>
-                        <label class="field">
+                        <label class="field" id="districtField">
                             <span class="field__label" for="district">เขต / อำเภอ<span class="required">*</span></span>
                             <input class="field__input" type="text" id="district" name="district" placeholder="District"
                                 value="{{this.users.district}}" required/>
                         </label>
                     </div>
                     <div class="fields fields--2">
-                        <label class="field">
+                        <label class="field" id="provinceField">
                             <span class="field__label" for="province">จังหวัด<span class="required">*</span></span>
                             <input class="field__input" type="text" id="province" name="province" placeholder="Bangkok"
                                 value="{{this.users.province}}" required/>
@@ -71,15 +71,15 @@
                         </ul>
                     </div>
                      <div class="fields fields--2">
-                        <label class="field">
-                            <span class="field__label" for="province">วันที่ชำระเงิน<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="date" name="date"
-                                placeholder="13/1/2566" pattern="[0-9]{2}/[0-9]{1-2}/[0-9]{4}" required/>
+                        <label class="field" id="datefield">
+                            <span class="field__label" for="date">วันที่ชำระเงิน<span class="required">*</span></span>
+                            <input class="field__input" type="text" id="date" name="date"  pattern="[0-3][0-9]/[0-1][0-9]/25[0-7][0-9]"
+                                placeholder="13/1/2566" required/>
                         </label>
-                        <label class="field">
+                        <label class="field" id="timefield">
                             <span class="field__label" for="time">เวลา<span class="required">*</span></span>
-                            <input class="field__input" type="text" id="time" name="time"
-                                placeholder="17:01" pattern="[0-9]{2}:[0-9]{2}" required/>
+                            <input class="field__input" type="text" id="time" name="time"  pattern="[0-2][0-9]:[0-5][0-9]"
+                                placeholder="17:01"  required/>
                         </label>
                     </div>
                     <div class="mb-3">

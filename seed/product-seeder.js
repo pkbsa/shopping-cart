@@ -2,7 +2,7 @@ var Product = require('../models/product')
 var mongoose = require('mongoose');
 const { exit } = require('process');
 
-mongoose.connect('mongodb+srv://admin:1234@cluster0.espispq.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://SmilealniS:sutorimu13@npm-olive.4z8itim.mongodb.net/?retryWrites=true&w=majority')
 
 var products = [
     new Product({

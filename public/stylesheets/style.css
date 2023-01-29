@@ -195,6 +195,9 @@ body {
 .page-profile .Cancel{
     background-color: rgb(183, 36, 36);
 }
+.page-profile .accordion{
+    overflow: scroll;   
+}
 .page-profile .accordion-header button{
     font-size: 0.62em;
     border: solid 1px rgb(174, 172, 172);
