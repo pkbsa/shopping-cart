@@ -670,6 +670,21 @@ body {
 .content table{
     text-align: center;
 }
+.homepage{
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    height: 90vh;
+    align-items: center;
+    flex-direction: column;
+}
+.homepage #heading{
+    margin: 0;
+}
+#heading{
+    text-align: center;
+    margin: 1em 0 1em 0;
+}
 @media (max-width: 991px){
     .page-products .row {
         flex-direction: column;

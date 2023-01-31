@@ -11,19 +11,21 @@ var Order = require('../models/order');
 var User = require('../models/user')
 
 /* admin homepage*/
-router.get("/", isAdmin, function (req, res, next) {
-    Order.find( {}, null, {sort: {_id: -1}}, function (err, orders){
-        if (err) {
-            return res.write('Error!')
-          }
-          //console.log(orders)
-          var cart;
-          orders.forEach(function(order){
-            cart = new Cart(order.cart);
-            order.items = cart.generateArray(); 
-          })
-          res.render("admin/home",{orders: orders, isadmin: 1})
-    });
+router.get("/", function(req, res) {
+  Promise.all([
+      Order.countDocuments({}),
+      User.countDocuments({}),
+      Product.countDocuments({})
+  ]).then(function(results) {
+      res.render("admin/home", {
+          ordersLength: results[0],
+          usersLength: results[1],
+          productsLength: results[2],
+          isadmin :1
+      });
+  }).catch(function(error) {
+      res.status(500).send({ error: "Error getting collection length" });
+  });
 });
 
 router.get("/orders", isAdmin, function (req, res, next) {
