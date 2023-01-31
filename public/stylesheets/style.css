@@ -34,7 +34,7 @@ body {
 }
 
 .page-signin .row p.up {
-    font-size: 1.6em;
+    font-size: 1em;
     margin-bottom: 1.5em;
 }
 
@@ -52,7 +52,7 @@ body {
 }
 
 .page-signin .row .form-group input {
-    width: 25em;
+    width: 15em;
     border: 0px;
     background-color: #ffffff;
     border-bottom: solid black 1px;
@@ -61,7 +61,7 @@ body {
     font-size: 1.4em;
 }
 .page-signin .row .form-group label {
-    font-size: 1.4em;
+    font-size: 1em;
 }
 
 .page-signin .row .form-group input:focus {
@@ -75,7 +75,7 @@ body {
     border-radius: 50px;
     width: 10em;
     height: 3em;
-    font-size: 1.2em;
+    font-size: 0.75em;
     background-color: #ffffff;
     color: rgb(41, 113, 247);
     border: 1px solid rgb(41, 113, 247);
@@ -88,16 +88,15 @@ body {
 }
 
 .page-signin h1 {
-    font-size: 7em;
+    font-size: 4em;
 }
 .page-signin p {
-    font-size: 1.3em;
+    font-size: 0.8em;
 }
 
 .page-profile {
     gap: 1em;
-}
-
+}   
 
 .page-profile h1{
     font-size: 3em;
