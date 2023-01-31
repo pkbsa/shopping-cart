@@ -62,6 +62,17 @@ router.post("/edit", isAdmin, function (req, res, next) {
     });
   });
 });
+
+router.get("/delete-order/:id", function(req, res) {
+  var productId = req.params.id;
+  Order.deleteOne({ _id: productId }, function(err) {
+      if (err) {
+          return res.status(500).send({ error: "Error deleting order" });
+      }
+      res.redirect('/admin');
+  });
+});
+
 module.exports = router;
 
 function isAdmin(req, res, next) {

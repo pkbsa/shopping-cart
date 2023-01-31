@@ -21,9 +21,11 @@
         <td>{{this.name}}</td>
         <td>{{this.cart.totalPrice}}</td>
         <td>{{this.paymentMethod}}</td>
-        <td>{{this.status}}</td>
+        <td><button  class="btn status {{this.status}}">{{this.status}}</button></td>
         <td><button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#{{this._id}}">Edit</button></td>
-        <td><a href="#"><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+        <td>
+         <a href="admin/delete-order/{{this._id}}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+          </td>
       </tr>
       <!-- Modal -->
       <div class="modal fade" id="{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">

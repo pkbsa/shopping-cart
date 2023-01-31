@@ -50,7 +50,7 @@ router.post("/edit-profile", isLoggedIn, function (req, res, next) {
       console.log(res);
     }
   );
-  res.redirect("/");
+  res.redirect("/user/profile");
 });
 router.get("/logout", isLoggedIn, function (req, res, next) {
   req.logout(function (err) {

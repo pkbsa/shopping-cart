@@ -177,14 +177,23 @@ body {
    font-size: 0.75em;
    padding: 1em 0em 1em 0em;
 }
+.page-profile .status{
+    font-size: 0.75em;
+}
 .page-profile .Pending{
     background-color: rgb(234, 221, 83);
 }
-.page-profile .Finish{
+.page-profile .In-Progress{
+    background-color: rgb(26, 129, 163);
+    color: white;
+}
+.page-profile .Done{
     background-color: rgb(46, 149, 22);
+    color: white    ;
 }
 .page-profile .Cancel{
     background-color: rgb(183, 36, 36);
+    color: white;
 }
 .page-profile .accordion{
     overflow: scroll;   
@@ -586,6 +595,19 @@ body {
 }
 .content .modal-body input, textarea, ul, select{
     margin-bottom: 0.5rem;
+}
+.content .Pending{
+    color: rgb(178, 166, 35);
+}
+.content .In-Progress{
+    color: rgb(26, 129, 163);
+}
+.content .Done{
+    color: rgb(46, 149, 22);
+}
+.content .Cancel{
+    color: rgb(183, 36, 36);
+  
 }
 .list-group{
     margin-bottom: 0.5rem;
