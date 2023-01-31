@@ -40,7 +40,7 @@ router.get("/", isAdmin, function (req, res, next) {
             cart = new Cart(order.cart);
             order.items = cart.generateArray(); 
           })
-          res.render("admin/home",{orders: orders})
+          res.render("admin/home",{orders: orders, isadmin: 1})
     });
 });
 module.exports = router;

@@ -22,6 +22,8 @@ function showTab(n) {
     nextBtn.setAttribute("type", "button");
   }
   // ... and run a function that displays the correct step indicator:
+  fixStepIndicator(n)
+
 }
 
 function nextPrev(n) {
@@ -36,9 +38,10 @@ function nextPrev(n) {
   // if you have reached the end of the form... :
   if (currentTab >= x.length) {
     //...the form gets submitted:
+    
     if (validateForm()) {
       //...the form gets submitted:
-      document.getElementById("myForm").submit();
+      document.getElementById("regForm").submit();
     }
     return false;
   }
@@ -68,6 +71,16 @@ function validateForm() {
     }
   }
 
+  function fixStepIndicator(n) {
+    // This function removes the "active" class of all steps...
+    var i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
+      x[i].className = x[i].className.replace(" active", "");
+    }
+    //... and adds the "active" class to the current step:
+    x[n].className += " active";
+  }
+
   let Fname = document.getElementById('firstname');
   let Lname = document.getElementById('lastname');
   let Address = document.getElementById('address');
@@ -76,9 +89,14 @@ function validateForm() {
   let Province = document.getElementById('province');
   let zipcode = document.getElementById("zipcode");
   let phone = document.getElementById("phone");
+  let paymentDate = document.getElementById("date");
+  let paymentTime = document.getElementById("time");
+
 
   let zipCodeRegex = /^[0-9]{5}$/;
   let phoneRegex = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+  let dateRegex = /^[0-3][0-9]\/[0-1][0-9]\/256[5-9]$/;
+  let timeRegex = /^[0-9]{2}:[0-9]{2}$/;
 
   if(Fname.classList.contains('invalid')){
     document.getElementById('fnameField').className = 'field red'
@@ -129,6 +147,24 @@ function validateForm() {
     let phoneField = document.getElementById('phonefield')
     phoneField.className = 'field'
   }
+    if(!dateRegex.test(paymentDate.value)){
+      paymentDate.className += " invalid"
+      let dateField = document.getElementById('datefield')
+      dateField.className += ' red'
+    }else{
+      let dateField = document.getElementById('datefield')
+      dateField.className = 'field'
+    }
+    if(!timeRegex.test(paymentTime.value)){
+      paymentTime.className += " invalid"
+      let timeField = document.getElementById('timefield')
+      timeField.className += ' red'
+    }else{
+      let timeField = document.getElementById('timefield')
+      timeField.className = 'field'
+    }
+  
+
   // If the valid status is true, mark the step as finished and valid:
   if (valid) {
     document.getElementsByClassName("step")[currentTab].className += " finish";
