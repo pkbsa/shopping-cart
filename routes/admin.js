@@ -30,7 +30,7 @@ router.get("/product/:id", isAdmin, function (req, res, next) {
 
 /* admin homepage*/
 router.get("/", isAdmin, function (req, res, next) {
-    Order.find( {}, function (err, orders){
+    Order.find( {}, null, {sort: {_id: -1}}, function (err, orders){
         if (err) {
             return res.write('Error!')
           }

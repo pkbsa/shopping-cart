@@ -8,10 +8,10 @@
     </div>
     <h1>Our Products</h1>
     <h2>สินค้าของเราถูกสร้างมาจากใจ และ ได้รับการการันตีคุณภาพ</h2>
-    <div class="main">
+    <div class="row row-cols-4">
         {{#each products}}
             {{property}}
-            <div class="col-md-6 col-l-4 col-xl-3 middle width">
+            <div class="width">
                 <div class="thumbnail">
                     <img src="{{ this.imagePath }}" alt="..." class="img-responsive">
                     <div class="caption">
@@ -25,7 +25,7 @@
             </div>
         {{/each}}
         {{#each remainDiv}}
-        <div class="col-md-6 col-l-4 col-xl-3 middle width">
+        <div class="width">
             <div class="thumbnail">
             
                 <div class="caption">

@@ -6,7 +6,7 @@
             <form class="form" method="POST" action="/user/edit-profile">
                 <div class="fields fields--2">
                     <label class="field">
-                        <span class="field__label" for="firstname">First name<span>
+                        <span class="field__label" for="firstname">First name</span>
                         <input class="field__input" type="text" id="firstname" name="firstname" value="{{this.users.firstname}}" placeholder="Firstname"/>
                     </label>
                     <label class="field">
@@ -75,14 +75,15 @@
                                 <div class="panel-body">
                                     <ul class="list-group">
                                         {{#each this.items}}
-                                        <li class="list-group-item">
-                                            <span class="badge">{{this.price}}.00 บาท</span>
+                                        <li class="list-group-item space-between">
                                             {{this.item.title}} ( จำนวน : {{this.qty}} ชิ้น )
+                                            <span class="badge bg-secondary">{{this.price}}.00 บาท</span>
                                         </li>
                                         {{/each}}
-                                        <li class="list-group-item">
-                                            <span class="badge">30.00 บาท</span>
+                                        <li class="list-group-item space-between">
                                             ค่าส่ง
+                                            <span class="badge bg-secondary">30.00 บาท</span>
+                                            
                                         </li>
                                     </ul>
                                 </div>
