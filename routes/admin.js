@@ -8,6 +8,7 @@ var fs = require("fs");
 
 var Product = require("../models/product");
 var Order = require('../models/order');
+var User = require('../models/user')
 
 /* admin homepage*/
 router.get("/", isAdmin, function (req, res, next) {
@@ -47,6 +48,15 @@ router.get("/products", isAdmin, function (req, res, next) {
           }
         res.render("admin/products",{products: products, isadmin: 1})
     });
+});
+
+router.get("/users", isAdmin, function (req, res, next) {
+  User.find( {}, function (err, users){
+      if (err) {
+          return res.write('Error!')
+        }
+      res.render("admin/users",{users: users, isadmin: 1})
+  });
 });
 
 router.post("/order-edit", isAdmin, function (req, res, next) {
