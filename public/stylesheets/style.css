@@ -609,6 +609,9 @@ body {
     color: rgb(183, 36, 36);
   
 }
+.content td,th{
+    vertical-align: middle;
+}
 .list-group{
     margin-bottom: 0.5rem;
 }
@@ -659,7 +662,7 @@ body {
     border-radius: 10px;
 }
 .content{
-    font-size: 1.4em;
+    font-size: 1.1em;
 }
 .content i{
     font-size: 1.5em;
