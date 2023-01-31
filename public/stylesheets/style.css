@@ -570,6 +570,19 @@ body {
 .content tbody{
     font-size: 0.75em;
 }
+.content .modal-body{
+    font-size: 0.75em;
+}
+.content .modal-body img{
+    object-fit: contain;
+    margin-bottom: 0.5rem;
+}
+.content .modal-body input, textarea, ul, select{
+    margin-bottom: 0.5rem;
+}
+.list-group{
+    margin-bottom: 0.5rem;
+}
 /* Navbar */
 .navbar {
     display: flex;
