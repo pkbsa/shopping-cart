@@ -34,7 +34,7 @@ router.get("/", isAdmin, function (req, res, next) {
         if (err) {
             return res.write('Error!')
           }
-          console.log(orders)
+          //console.log(orders)
           var cart;
           orders.forEach(function(order){
             cart = new Cart(order.cart);
@@ -42,6 +42,25 @@ router.get("/", isAdmin, function (req, res, next) {
           })
           res.render("admin/home",{orders: orders, isadmin: 1})
     });
+});
+
+router.post("/edit", isAdmin, function (req, res, next) {
+  console.log(req.body)
+  Order.findOne({ _id: req.body._id }, function(err, order) {
+    if (err) {
+        return res.status(500).send({ error: "Error updating order status" });
+    }
+    if (!order) {
+        return res.status(404).send({ error: "Order not found" });
+    }
+    order.status = req.body.status;
+    order.save(function(err) {
+        if (err) {
+            return res.status(500).send({ error: "Error updating order status" });
+        }
+        res.redirect('/admin');
+    });
+  });
 });
 module.exports = router;
 
