@@ -194,9 +194,7 @@ body {
     background-color: rgb(183, 36, 36);
     color: white;
 }
-.page-profile .accordion{
-    overflow: scroll;   
-}
+
 .page-profile .accordion-header button{
     font-size: 0.5em;
     border: solid 1px rgb(174, 172, 172);
@@ -218,14 +216,26 @@ body {
 .page-products{
     gap: 2em
 }
+.page-products .row{
+    justify-content: center;
+    margin-bottom: 2em;
+}
 .page-products .main{
     display: flex;
     width: 100%;
+}
+.page-products .width{
+    width: 24%;
+    margin-bottom: 0.8em;
+}
+.page-products .caption{
+    width: 20vw;
 }
 
 .page-products .thumbnail{
     border: 0px;
     width: 20vw;
+    margin: auto;
 }
 .page-products .thumbnail img{
     height: 20vw;
@@ -400,7 +410,6 @@ body {
     display: flex;
     flex-direction: column;
     width: 50vw;
-    overflow: scroll    ;
 }
 
 .page-checkout .flex-column-sum {
@@ -413,7 +422,6 @@ body {
     display: flex;
     flex-direction: column;
     background-color: rgb(243, 240, 240);
-    overflow: scroll;
     padding: 1em 2em 1em 2em;
     border-radius: 10px;
 }
@@ -763,6 +771,9 @@ body {
         width: 90vw;
         overflow: visible;
         margin-bottom: 2em;
+    }
+    .page-products .caption{
+        width: auto;
     }
 }
 @media (max-width: 768px){
