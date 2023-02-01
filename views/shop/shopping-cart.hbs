@@ -5,7 +5,7 @@
         {{#each products}}
         <div class="flex-row-1">
             <div class="flex-row-2">
-                <img src="{{this.item.imagePath}}">
+                <img src="{{this.item.imagePath.[0]}}">
                 <div>
                     <h2>{{this.item.title}}</h2>
                     <p>{{this.item.description}}</p>

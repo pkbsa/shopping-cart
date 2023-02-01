@@ -134,6 +134,39 @@ router.get("/delete-user/:id", isAdmin, function(req, res) {
   });
 });
 
+router.post("/add-product/", isAdmin, function(req, res){
+  console.log(req.body);
+  let sampleFiles = req.files.sampleFile;
+
+  if(!Array.isArray(sampleFiles)){
+    sampleFiles = [sampleFiles];
+  }
+
+  let filePaths = [];
+  sampleFiles.forEach(function(sampleFile) {
+    let uploadFilename = "/products/" + sampleFile.name;
+    //console.log(uploadFilename)
+    let uploadFile = "./public/products/" + sampleFile.name;
+    filePaths.push(uploadFilename);
+    sampleFile.mv(uploadFile);
+  });
+
+  // store the file paths in the database
+  let product = new Product({
+    title: req.body.title,
+    description: req.body.description,
+    price: req.body.price,
+    status: req.body.status,
+    imagePath: filePaths
+  });
+  product.save(function(err) {
+    if (err) {
+      return res.status(500).send({ error: "Error saving product" });
+    }
+    res.redirect("/admin/products");
+  });
+});
+
 module.exports = router;
 
 function isAdmin(req, res, next) {
