@@ -195,29 +195,31 @@ router.post("/checkout", isLoggedIn, function (req, res, next) {
     date: curDate,
   });
 
-  setTimeout(function () {
-    var payload = `\nวันที่สั่ง : ${order.date}\n\n${itemsString}\n\nวันที่ชำระเงิน : ${order.paymentDate}\nวิธีการชำระเงิน : ${order.paymentMethod}\nจำนวน : ${order.cart.totalPrice}.00 บาท\n\nที่อยู่จัดส่ง\n${order.name}\n${order.address}`;
+  if(line_api != "PASTE_YOUR_LINENOTIFY_TOKEN"){
+    setTimeout(function () {
+      var payload = `\nวันที่สั่ง : ${order.date}\n\n${itemsString}\n\nวันที่ชำระเงิน : ${order.paymentDate}\nวิธีการชำระเงิน : ${order.paymentMethod}\nจำนวน : ${order.cart.totalPrice}.00 บาท\n\nที่อยู่จัดส่ง\n${order.name}\n${order.address}`;
 
-    const formData = new FormData();
-    formData.append("imageFile", fs.createReadStream(uploadFile));
-    formData.append("message", `${payload}`);
-    formData.append(
-      "access_token",
-      line_api
-    );
-    axios
-      .post("https://notify-api.line.me/api/notify", formData, {
-        headers: {
-          Authorization: `Bearer ${line_api}`,
-        },
-      })
-      .then((response) => {
-        //console.log(response.data);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }, 8000);
+      const formData = new FormData();
+      formData.append("imageFile", fs.createReadStream(uploadFile));
+      formData.append("message", `${payload}`);
+      formData.append(
+        "access_token",
+        line_api
+      );
+      axios
+        .post("https://notify-api.line.me/api/notify", formData, {
+          headers: {
+            Authorization: `Bearer ${line_api}`,
+          },
+        })
+        .then((response) => {
+          //console.log(response.data);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }, 8000);
+  }
 
   order.save(function (err, result) {
     if (err) {
