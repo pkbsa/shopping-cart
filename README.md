@@ -13,9 +13,11 @@ to create a mongodb collection :
 https://www.mongodb.com/atlas/database
 ```
 
-next paste you mongodb collection url to your app.js
+next paste you mongodb collection url to the .env file
 ```
-mongoose.connect('YOUR_MONGODB_URL')
+#SET YOUR DATABASE & LINE API HERE
+MONGO_URL = "PASTE_YOUR_MONGODB_URL"
+LINE_API = "PASTE_YOUR_LINENOTIFY_TOKEN"
 ```
 
 finally you will need to insert information into the Products table, You can use my dummy data by cd into seed directory and enter the command
