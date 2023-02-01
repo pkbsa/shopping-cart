@@ -445,7 +445,7 @@ body {
 }
 .page-checkout ul {
     margin: 0rem .5rem .5rem 2rem;
-    font-size: 1.5em;
+    font-size: 1em;
 }
 
 .page-checkout .field__label {
@@ -580,7 +580,7 @@ body {
 }
 .page-checkout .mb-3{
     margin-top: 1em;
-    font-size: 1.5rem;
+    font-size: 1rem;
 }
 .content tbody{
     font-size: 0.75em;

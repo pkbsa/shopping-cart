@@ -170,24 +170,16 @@ router.post("/checkout", isLoggedIn, function (req, res, next) {
     date: curDate,
   });
 
-  //console.log(cart)
-  // for (let id in cart.items) {
-  //   Product.updateOne({_id: id},{$inc: { qty:  -cart.items[id].qty }},function(err,res){
-  //     if (err) throw err;
-  //     console.log(cart.items[id].qty+" item updated");
-  //   })
-  // }
-  var payload = `\nวันที่สั่ง : ${order.date}\n\n${itemsString}\n\nวันที่ชำระเงิน : ${order.paymentDate}\nวิธีการชำระเงิน : ${order.paymentMethod}\nจำนวน : ${order.cart.totalPrice}.00 บาท\n\nที่อยู่จัดส่ง\n${order.name}\n${order.address}`;
-
-  const formData = new FormData();
-  formData.append("imageFile", fs.createReadStream(uploadFile));
-  formData.append("message", `${payload}`);
-  formData.append(
-    "access_token",
-    "Eowx3XT2qK5FJf0PQ5BRdFJM80b5hIDx6l55OZ4uEOn"
-  );
-
   setTimeout(function () {
+    var payload = `\nวันที่สั่ง : ${order.date}\n\n${itemsString}\n\nวันที่ชำระเงิน : ${order.paymentDate}\nวิธีการชำระเงิน : ${order.paymentMethod}\nจำนวน : ${order.cart.totalPrice}.00 บาท\n\nที่อยู่จัดส่ง\n${order.name}\n${order.address}`;
+
+    const formData = new FormData();
+    formData.append("imageFile", fs.createReadStream(uploadFile));
+    formData.append("message", `${payload}`);
+    formData.append(
+      "access_token",
+      "Eowx3XT2qK5FJf0PQ5BRdFJM80b5hIDx6l55OZ4uEOn"
+    );
     axios
       .post("https://notify-api.line.me/api/notify", formData, {
         headers: {

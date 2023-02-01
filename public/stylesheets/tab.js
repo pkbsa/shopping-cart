@@ -21,9 +21,6 @@ function showTab(n) {
     nextBtn.innerHTML = "Next";
     nextBtn.setAttribute("type", "button");
   }
-  // ... and run a function that displays the correct step indicator:
-  fixStepIndicator(n)
-
 }
 
 function nextPrev(n) {
@@ -60,25 +57,21 @@ function validateForm() {
   
   // A loop that checks every input field in the current tab:
   for (i = 0; i < y.length; i++) {
+    console.log(y[i])
     // If a field is empty...
     if (y[i].value == "") {
       // add an "invalid" class to the field:
       y[i].className = "field__input invalid";
       // and set the current valid status to false:
       valid = false;
-    }else{
+    } else if (!y[i].value.match(y[i].pattern)) {
+      // If the value does not match the pattern defined in the form, add an "invalid" class to the field:
+      y[i].className = "field__input invalid";
+      // and set the current valid status to false:
+      valid = false;
+    } else {
       y[i].className = "field__input";
     }
-  }
-
-  function fixStepIndicator(n) {
-    // This function removes the "active" class of all steps...
-    var i, x = document.getElementsByClassName("step");
-    for (i = 0; i < x.length; i++) {
-      x[i].className = x[i].className.replace(" active", "");
-    }
-    //... and adds the "active" class to the current step:
-    x[n].className += " active";
   }
 
   let Fname = document.getElementById('firstname');
@@ -147,22 +140,24 @@ function validateForm() {
     let phoneField = document.getElementById('phonefield')
     phoneField.className = 'field'
   }
-    if(!dateRegex.test(paymentDate.value)){
-      paymentDate.className += " invalid"
-      let dateField = document.getElementById('datefield')
-      dateField.className += ' red'
-    }else{
-      let dateField = document.getElementById('datefield')
-      dateField.className = 'field'
-    }
-    if(!timeRegex.test(paymentTime.value)){
-      paymentTime.className += " invalid"
-      let timeField = document.getElementById('timefield')
-      timeField.className += ' red'
-    }else{
-      let timeField = document.getElementById('timefield')
-      timeField.className = 'field'
-    }
+    // if(!dateRegex.test(paymentDate.value)){
+    //   paymentDate.className += " invalid"
+    //   let dateField = document.getElementById('datefield')
+    //   dateField.className += ' red'
+    //   valid = false
+    // }else{
+    //   let dateField = document.getElementById('datefield')
+    //   dateField.className = 'field'
+    // }
+    // if(!timeRegex.test(paymentTime.value)){
+    //   paymentTime.className += " invalid"
+    //   let timeField = document.getElementById('timefield')
+    //   timeField.className += ' red'
+    //   valid = false
+    // }else{
+    //   let timeField = document.getElementById('timefield')
+    //   timeField.className = 'field'
+    // }
   
 
   // If the valid status is true, mark the step as finished and valid:

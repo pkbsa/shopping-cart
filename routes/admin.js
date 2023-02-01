@@ -11,7 +11,7 @@ var Order = require('../models/order');
 var User = require('../models/user')
 
 /* admin homepage*/
-router.get("/", function(req, res) {
+router.get("/", isAdmin,function(req, res) {
   Promise.all([
       Order.countDocuments({}),
       User.countDocuments({}),
