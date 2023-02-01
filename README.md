@@ -38,7 +38,12 @@ Snapshot of the website :
 <img src="./img/img2.png" alt="img2">
 <img src="./img/img3.png" alt="img3">
 <img src="./img/img4.png" alt="img4">
+<img src="./img/img9.png" alt="img9">
 <img src="./img/img5.png" alt="img5">
 <img src="./img/img6.png" alt="img6">
 <img src="./img/img7.png" alt="img7">
 <img src="./img/img8.png" alt="img8">
+<img src="./img/img10.png" alt="img10">
+<img src="./img/img11.png" alt="img11">
+<img src="./img/img12.png" alt="img12">
+<img src="./img/img13.png" alt="img13">
