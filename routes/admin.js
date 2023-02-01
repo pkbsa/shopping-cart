@@ -104,7 +104,7 @@ router.post("/product-edit", isAdmin, function (req, res, next) {
   });
 });
 
-router.get("/delete-order/:id", function(req, res) {
+router.get("/delete-order/:id", isAdmin, function(req, res) {
   var orderId = req.params.id;
   Order.deleteOne({ _id: orderId }, function(err) {
       if (err) {
@@ -114,7 +114,7 @@ router.get("/delete-order/:id", function(req, res) {
   });
 });
 
-router.get("/delete-product/:id", function(req, res) {
+router.get("/delete-product/:id", isAdmin, function(req, res) {
   var productId = req.params.id;
   Product.deleteOne({ _id: productId }, function(err) {
       if (err) {
@@ -124,7 +124,7 @@ router.get("/delete-product/:id", function(req, res) {
   });
 });
 
-router.get("/delete-user/:id", function(req, res) {
+router.get("/delete-user/:id", isAdmin, function(req, res) {
   var userId = req.params.id;
   User.deleteOne({ _id: userId }, function(err) {
       if (err) {

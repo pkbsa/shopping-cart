@@ -789,6 +789,9 @@ body {
     .toggle-button {
         display: flex;
     }
+    .navbar{
+        height: auto;
+    }
 
     .navbar-links {
         display: none;
