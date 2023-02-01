@@ -26,7 +26,7 @@
             <h3>{{product.description}}</h3>
             <h3>ราคา : {{product.price}}.00 บาท</h3>
             <div class='column-custom'>
-                <a href="/add-to-cart-product/{{product._id}}" id="sellbutton" class="btn btn-success">เพิ่มลงตะกร้า</a>
+                <a href="/add-to-cart-product/{{product._id}}" id="sellbutton" class="btn btn-success {{product.status}}">เพิ่มลงตะกร้า</a>
             </div>
         </div>
     </div>

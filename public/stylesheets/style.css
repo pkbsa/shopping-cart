@@ -672,6 +672,9 @@ body {
     height: 70vh;
     object-fit: contain;
 }
+.page-viewproduct .notAvailable{
+    background-color: rgb(180, 39, 39);
+}
 
 /* Navbar */
 .navbar {
