@@ -1,7 +1,8 @@
 var Product = require('../models/product')
 var mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://admin:1234@cluster0.espispq.mongodb.net/?retryWrites=true&w=majority')
+const { mongodb_url } = require('./config/config');
+mongoose.connect(mongodb_url)
 
 var products = [
     new Product({

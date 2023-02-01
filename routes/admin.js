@@ -151,7 +151,6 @@ router.post("/add-product/", isAdmin, function(req, res){
     sampleFile.mv(uploadFile);
   });
 
-  // store the file paths in the database
   let product = new Product({
     title: req.body.title,
     description: req.body.description,

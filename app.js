@@ -1,6 +1,5 @@
 var express = require('express');
 var path = require('path');
-var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
@@ -20,9 +19,10 @@ var userRoutes = require('./routes/user');
 var adminRoutes = require('./routes/admin')
 
 var app = express();
+const { mongodb_url } = require('./config/config');
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://admin:1234@cluster0.espispq.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect(mongodb_url)
 
 require('./config/passport');
 

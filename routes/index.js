@@ -2,8 +2,6 @@ var express = require("express");
 var router = express.Router();
 var Cart = require("../models/cart");
 
-var generatePayload = require("promptpay-qr");
-var qrcode = require("qrcode");
 var fs = require("fs");
 
 var Product = require("../models/product");
@@ -11,6 +9,8 @@ var Order = require("../models/order");
 
 const axios = require("axios");
 const FormData = require("form-data");
+
+const { line_api } = require('../config/config');
 
 /* GET home page. */
 router.get("/", function (req, res, next) {
@@ -203,12 +203,12 @@ router.post("/checkout", isLoggedIn, function (req, res, next) {
     formData.append("message", `${payload}`);
     formData.append(
       "access_token",
-      "Eowx3XT2qK5FJf0PQ5BRdFJM80b5hIDx6l55OZ4uEOn"
+      line_api
     );
     axios
       .post("https://notify-api.line.me/api/notify", formData, {
         headers: {
-          Authorization: "Bearer Eowx3XT2qK5FJf0PQ5BRdFJM80b5hIDx6l55OZ4uEOn",
+          Authorization: `Bearer ${line_api}`,
         },
       })
       .then((response) => {
