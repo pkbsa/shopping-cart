@@ -12,10 +12,16 @@ to create a mongodb collection :
 ```
 https://www.mongodb.com/atlas/database
 ```
+(optional) if you want the website to send you a line message for summary the order, you will need to create a group chat and paste a token in the env file.
+you can get your line notify token here
+```
+https://notify-bot.line.me/en/
+```
 
 next paste you mongodb collection url to the .env file
 ```
 #SET YOUR DATABASE & LINE API HERE
+
 MONGO_URL = "PASTE_YOUR_MONGODB_URL"
 LINE_API = "PASTE_YOUR_LINENOTIFY_TOKEN"
 ```
