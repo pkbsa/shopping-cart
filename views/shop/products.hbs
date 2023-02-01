@@ -13,9 +13,9 @@
             {{property}}
             <div class="width">
                 <div class="thumbnail">
-                    <img src="{{ this.imagePath }}" alt="..." class="img-responsive">
+                    <a href="/products/{{this._id}}"><img src="{{ this.imagePath }}" alt="..." class="img-responsive"></a>
                     <div class="caption">
-                        <h3>{{this.title}}</h3>
+                        <h3><a class="title" href="/products/{{this._id}}">{{this.title}}</a></h3>
                         <div class="clearfix">
                             <div class="price pull-left">{{this.price}}.00 บาท</div>
                             <a href="/add-to-cart/{{this._id}}" class="pull-right {{this.status}}">ADD TO CART</a>

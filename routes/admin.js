@@ -127,7 +127,6 @@ router.get("/delete-product/:id", function(req, res) {
 router.get("/delete-user/:id", function(req, res) {
   var userId = req.params.id;
   User.deleteOne({ _id: userId }, function(err) {
-    console.log("Found")
       if (err) {
           return res.status(500).send({ error: "Error deleting users" });
       }

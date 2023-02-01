@@ -38,6 +38,16 @@ router.get("/products", function (req, res, next) {
   });
 });
 
+router.get("/products/:id", function (req, res, next) {
+  var productId = req.params.id;
+  Product.findById(productId, function (err, product) {
+    if (err) {
+      return res.redirect("/products");
+    }
+    res.render("shop/product-view", {product: product});
+  });
+});
+
 router.get("/add-to-cart/:id", function (req, res, next) {
   var productId = req.params.id;
   var cart = new Cart(req.session.cart ? req.session.cart : {});
@@ -50,6 +60,21 @@ router.get("/add-to-cart/:id", function (req, res, next) {
     req.session.cart = cart;
     console.log(req.session.cart);
     res.redirect("/products");
+  });
+});
+
+router.get("/add-to-cart-product/:id", function (req, res, next) {
+  var productId = req.params.id;
+  var cart = new Cart(req.session.cart ? req.session.cart : {});
+
+  Product.findById(productId, function (err, product) {
+    if (err) {
+      return res.redirect("/products");
+    }
+    cart.add(product, product.id);
+    req.session.cart = cart;
+    console.log(req.session.cart);
+    res.redirect("/products/"+productId);
   });
 });
 
