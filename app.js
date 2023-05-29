@@ -22,7 +22,7 @@ var adminRoutes = require('./routes/admin')
 var app = express();
 
 mongoose.set('strictQuery', true);
-mongoose.connect('mongodb+srv://admin:1234@cluster0.espispq.mongodb.net/?retryWrites=true&w=majority')
+mongoose.connect('mongodb+srv://admin:1234@cluster0.espispq.mongodb.net/')
 
 require('./config/passport');
 
